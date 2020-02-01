@@ -26,13 +26,6 @@ namespace PIN_Projekt.Controllers
             return View(await _context.Parking.ToListAsync());
         }
 
-        public IActionResult BasicQuerySyntax(string regOznake)
-        {
-            var emp_data = from e in _context.Parking
-                           where e.registracija==regOznake
-                           select e;
-            return View(emp_data);
-        }
         // GET: Parkings/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -172,6 +165,13 @@ namespace PIN_Projekt.Controllers
         private bool ParkingExists(int id)
         {
             return _context.Parking.Any(e => e.Id == id);
+        }
+        public IActionResult DetaljniPrikaz(string regOznake)
+        {
+            var emp_data = from e in _context.Parking
+                           where regOznake == e.registracija
+                           select e;
+            return View(emp_data);
         }
         
     }

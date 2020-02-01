@@ -7,11 +7,14 @@
 
 <h5>Unos vozila u parking</h5>
 
-<form asp-action="BasicQuerySyntax" method="post">
-    <label>Registracijske oznake</label>
-    <input type="text" name="RegOznake"/>
-    <input type="submit" value="registracijskeOznake"/>
+<form asp-action="DetaljniPrikaz" method="post">
+    <label>Pretraži po registracijskoj oznaci</label>
+    <input type="text" name="RegOznake" />
+    <input type="submit" value="Pretraži" />
 </form>
+
+
+
 
 <table class="table">
     <thead>
@@ -22,38 +25,31 @@
             <th>
                 Model vozila
             </th>
+
             <th>
-                Broj osoba u vozilu
-            </th>
-            <th>
-                <a asp-action="Create">Create New</a>
+                <a asp-action="Create">Unesi vozilo</a>
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
+@foreach(var item in Model) {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.registracija)
+                    <div>@Html.DisplayFor(modelItem => item.registracija)</div>
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.model)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.brojOsoba)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-
+                    <form>
+                        <button class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Uredi</button>
+                    </form>
+                    <form>
+                        <button class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Napustio</button>
+                    </form>
 
                 </td>
 
             </tr>
         }
-        
-
     </tbody>
+    
 </table>
+
