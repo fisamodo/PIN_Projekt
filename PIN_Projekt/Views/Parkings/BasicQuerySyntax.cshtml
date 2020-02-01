@@ -1,0 +1,32 @@
+﻿@model IEnumerable<PIN_Projekt.Models.Parking>
+
+@{
+    ViewData["Title"] = "Basic Query Syntax";
+}
+@foreach (var item in Model)
+    {
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.registracija)
+            </dt>
+            <dd class="col-sm-10">
+                @item.registracija
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.model)
+            </dt>
+            <dd class="col-sm-10">
+                @item.model
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.brojOsoba)
+            </dt>
+            <dd class="col-sm-10">
+                @item.brojOsoba
+            </dd>
+        </dl>
+
+    }
+
+
+

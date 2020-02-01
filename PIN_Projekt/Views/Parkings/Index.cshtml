@@ -1,0 +1,59 @@
+﻿@model IEnumerable<PIN_Projekt.Models.Parking>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h5>Unos vozila u parking</h5>
+
+<form asp-action="BasicQuerySyntax" method="post">
+    <label>Registracijske oznake</label>
+    <input type="text" name="RegOznake"/>
+    <input type="submit" value="registracijskeOznake"/>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Registracijska oznaka vozila
+            </th>
+            <th>
+                Model vozila
+            </th>
+            <th>
+                Broj osoba u vozilu
+            </th>
+            <th>
+                <a asp-action="Create">Create New</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.registracija)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.brojOsoba)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+
+                </td>
+
+            </tr>
+        }
+        
+
+    </tbody>
+</table>
