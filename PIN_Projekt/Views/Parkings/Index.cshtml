@@ -6,18 +6,20 @@
     ViewData["Title"] = "Index";
 }
 
-
-<h5>Unos vozila u parking</h5>
-
-<form asp-action="DetaljniPrikaz" method="post">
-    <label>Pretraži po registracijskoj oznaci</label>
-    <input type="text" name="RegOznake" />
-    <input type="submit" value="Pretraži" />
-</form>
-<div>
+    <div style="margin-bottom:60px;">
+        <h3 style="text-align:center;">Unos vozila u parking</h3>
+    </div>
+    <div style="width:50%">
+        <form asp-action="DetaljniPrikaz" method="post">
+            <label>Pretraži po registracijskoj oznaci</label>
+            <input type="text" name="RegOznake" />
+            <input type="submit" value="Pretraži" />
+        </form>
+    </div>
+<div style="float:right;">
     
-    <h3>TRENUTNI BROJ VOZILA NA PARKINGU JE @Model.Select(i=> i.Id).Count() </h3>
-    <h3>TRENUTNI BROJ LJUDI NA PARKINGU JE @Model.Sum(i => i.brojOsoba) </h3>
+    <h5>TRENUTNI BROJ VOZILA NA PARKINGU JE @Model.Select(i=> i.Id).Count() </h5>
+    <h5>TRENUTNI BROJ LJUDI NA PARKINGU JE @Model.Sum(i => i.brojOsoba) </h5>
 </div>
 
 <table class="table">
@@ -42,11 +44,11 @@
         {
 
             <tr>
-                <td>
-                    <div>@Html.DisplayFor(modelItem => item.registracija)</div>
+                <td style="vertical-align:inherit">
+                    @Html.DisplayFor(modelItem => item.registracija)
                 </td>
                 <td>
-                    <form>
+                    <form style="margin-bottom:5px">
                         <button class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Uredi</button>
                     </form>
 
