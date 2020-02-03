@@ -1,9 +1,11 @@
-﻿@model IEnumerable<PIN_Projekt.Models.Parking>
+﻿@using System.Linq;
+@model IEnumerable<PIN_Projekt.Models.Parking>
 
 
 @{
     ViewData["Title"] = "Index";
 }
+
 
 <h5>Unos vozila u parking</h5>
 
@@ -12,9 +14,11 @@
     <input type="text" name="RegOznake" />
     <input type="submit" value="Pretraži" />
 </form>
-
-
-
+<div>
+    
+    <h3>TRENUTNI BROJ VOZILA NA PARKINGU JE @Model.Select(i=> i.Id).Count() </h3>
+    <h3>TRENUTNI BROJ LJUDI NA PARKINGU JE @Model.Sum(i => i.brojOsoba) </h3>
+</div>
 
 <table class="table">
     <thead>
@@ -32,7 +36,11 @@
         </tr>
     </thead>
     <tbody>
-@foreach(var item in Model) {
+
+
+        @foreach (var item in Model)
+        {
+
             <tr>
                 <td>
                     <div>@Html.DisplayFor(modelItem => item.registracija)</div>
@@ -41,6 +49,8 @@
                     <form>
                         <button class="btn btn-info" asp-action="Edit" asp-route-id="@item.Id">Uredi</button>
                     </form>
+
+
                     <form>
                         <button class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Napustio</button>
                     </form>
@@ -50,6 +60,6 @@
             </tr>
         }
     </tbody>
-    
+
 </table>
 

@@ -26,36 +26,11 @@ namespace PIN_Projekt.Controllers
             return View(await _context.Parking.ToListAsync());
         }
 
-        // GET: Parkings/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var parking = await _context.Parking
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (parking == null)
-            {
-                return NotFound();
-            }
-
-            return View();
-
+       
 
 
             
-        /**/
-    
-            //return View();
-        }
-        public async Task<IActionResult> Viewer(int? id)
-        {
-            return View();
-        }
-
-        // GET: Parkings/Create
+        
         
         
        public IActionResult Create()
@@ -73,6 +48,16 @@ namespace PIN_Projekt.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                var emp_data = (from e in _context.Parking
+                                select e).Count();
+
+                if (emp_data == 10)
+                {
+                    return View("Error1");
+                }
+
+                // @Model.Select(i => i.Id).Count()
                 _context.Add(parking);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -166,11 +151,23 @@ namespace PIN_Projekt.Controllers
         {
             return _context.Parking.Any(e => e.Id == id);
         }
+        
+      
         public IActionResult DetaljniPrikaz(string regOznake)
         {
-            var emp_data = from e in _context.Parking
-                           where regOznake == e.registracija
-                           select e;
+
+
+            var emp_data = (from e in _context.Parking
+                               where regOznake == e.registracija
+                               select e);
+
+            var emp_dataTest = emp_data.Count(); 
+            //count() radi, .First()ToString() baca exception jer je prazan set
+
+            if (emp_dataTest == 0)
+                return View("Error2");
+           
+
             return View(emp_data);
         }
         
